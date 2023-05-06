@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+    <title>Time Scheduler</title>
+    <meta content="" name="description">
+    <meta content="" name="keywords">
+
+    <!-- Template Main CSS File -->
+    <link href="../css/index.css" rel="stylesheet">
+</head>
+
+<body>
+    <!-- ======= Header ======= -->
+    <header id="header" class="header fixed-top d-flex align-items-center">
+        <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+            <h1>Class Detail</h1>
+        </a>
+    </header><!-- End Header -->
+
+    <div class="container">
+        <div class="row">
+            <div class="column">
+                <div class="cours">
+                    <b>Teacher : </b>
+                    <%= teacher %> </br></br>
+                        <b>Room : </b>
+                        <%= room %> </br></br>
+                            <b>Student group : </b>
+                            <%= group %> </br></br>
+                                <b>Subject : </b>
+                                <%= subject %> </br></br>
+                </div>
+            </div>
+            <div class="column">
+                <div class="timeslot">
+                    <b>Day : </b>
+                    <%= day %> </br></br>
+                        <b>Starting time : </b>
+                        <%= begin_time %> </br></br>
+                            <b>Ending time : </b>
+                            <%= end_time %> </br></br>
+                </div>
+            </div>
+        <input type="submit" value="Create a new class" onclick="location.href='/'">
+        <input type="submit" value="See timetable" onclick="location.href='/timetable'">
+        </div>
+    </div>
+
+</body>
+
+</html>

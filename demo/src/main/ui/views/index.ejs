@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+
+  <title>Time Scheduler</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Template Main CSS File -->
+  <link href="../css/index.css" rel="stylesheet">
+</head>
+
+<body>
+  <!-- ======= Header ======= -->
+  <header id="header" class="header fixed-top d-flex align-items-center">
+    <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+      <h1>Time Scheduler</h1>
+    </a>
+
+    </div>
+  </header><!-- End Header -->
+
+  <div class="container">
+    <form action="/result" method="post">
+      <div class="row">
+        <div class="column">
+          <div class="cours">
+            <label for="teacher">Teacher :</label>
+            <select id="teacher" name="teacher">
+              <option value="Iftene Adrian">Iftene Adrian</option>
+              <option value="Filipescu Iustina">Filipescu Iustina</option>
+            </select></br>
+            </br>
+
+            <label for="room">Room assign to this class :</label>
+            <select id="room" name="room">
+              <option value="Room C308">Room C308</option>
+              <option value="Room C309">Room C309</option>
+            </select></br>
+            </br>
+
+            <label for="group">Student group :</label>
+            <select id="group" name="group">
+              <option value="Group B4">Group B4</option>
+              <option value="Group B5">Group B5</option>
+            </select></br>
+            </br>
+
+            <label for="subject">Subject of the class :</label>
+            <select id="subject" name="subject">
+              <option value="Programare avansata">Programare avansata</option>
+              <option value="Tehnologii Web">Tehnologii Web</option>
+            </select></br>
+            </br>
+          </div>
+        </div>
+
+        <div class="column">
+          <div class=" timeslot">
+            <label for="day">Day of the class :</label>
+            <select id="day" name="day">
+              <option value="Monday">Monday</option>
+              <option value="Tuesday">Tuesday</option>
+              <option value="Wednesday">Wednesday</option>
+              <option value="Thursday">Thursday</option>
+              <option value="Friday">Friday</option>
+              <option value="Saturday">Saturday</option>
+            </select></br>
+            </br>
+
+            <label for="begin_time">Begin of the class :</label>
+            <select id="begin_time" name="begin_time">
+              <option value="8:00">8:00</option>
+              <option value="9:00">9:00</option>
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="12:00">12:00</option>
+              <option value="13:00">13:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="18:00">18:00</option>
+            </select></br>
+            </br>
+
+            <label for="end_time">End of the class :</label>
+            <select id="end_time" name="end_time">
+              <option value="10:00">10:00</option>
+              <option value="11:00">11:00</option>
+              <option value="12:00">12:00</option>
+              <option value="13:00">13:00</option>
+              <option value="14:00">14:00</option>
+              <option value="15:00">15:00</option>
+              <option value="16:00">16:00</option>
+              <option value="17:00">17:00</option>
+              <option value="18:00">18:00</option>
+              <option value="19:00">19:00</option>
+              <option value="20:00">20:00</option>
+            </select></br>
+            </br>
+          </div>
+        </div>
+      </div>
+      <input type="submit" value="Submit">
+    </form>
+  </br>
+    <input type="submit" value="See timetable" onclick="location.href='/timetable'">
+  </div>
+
+</body>
+
+</html>
