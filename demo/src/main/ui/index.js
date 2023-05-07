@@ -33,4 +33,4 @@ app.post('/result', function (req, res) {
   res.render('result.ejs',data)
 })
 
-app.listen(8080, () => console.log(`App listening on port ${8080}!`))
+app.listen(3000, () => console.log(`App running in http://localhost:3000`))

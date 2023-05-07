@@ -3,7 +3,7 @@ package com.example.demo.entities;
 public class Timeslot {
     int startTime;
     int endTime;
-    String day;
+    Day day;
     StudGroup studGroup;
     Subject subject;
     String classType;
@@ -14,7 +14,7 @@ public class Timeslot {
     public Timeslot() {
     }
 
-    public Timeslot(int startTime, int endTime, String day, StudGroup studGroup, Subject subject,
+    public Timeslot(int startTime, int endTime, Day day, StudGroup studGroup, Subject subject,
                     String classType, Teacher teacher, Room room) {
         this.startTime = startTime;
         this.endTime = endTime;
@@ -42,11 +42,11 @@ public class Timeslot {
         this.endTime = endTime;
     }
 
-    public String getDay() {
+    public Day getDay() {
         return day;
     }
 
-    public void setDay(String day) {
+    public void setDay(Day day) {
         this.day = day;
     }
 

@@ -16,7 +16,7 @@
 <body>
   <!-- ======= Header ======= -->
   <header id="header" class="header fixed-top d-flex align-items-center">
-    <a href="index.html" class="logo d-flex align-items-center me-auto me-lg-0">
+    <a href="/" class="logo d-flex align-items-center me-auto me-lg-0">
       <h1>Time Scheduler</h1>
     </a>
 
@@ -24,7 +24,24 @@
   </header><!-- End Header -->
 
   <div class="container">
-    <form action="/result" method="post">
+
+    <script>
+      function addToSchedule() {
+        fetch('http://localhost:8080/schedule/add',
+                {
+                  method: 'PUT',
+                  headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                  },
+                  body: "test"
+                })
+        alert('Form submitted!');
+        return false;
+      }
+    </script>
+
+    <form action="/result" method="post" onsubmit="addToSchedule()">
       <div class="row">
         <div class="column">
           <div class="cours">
@@ -35,6 +52,21 @@
             </select></br>
             </br>
 
+            <label for="subject">Subject of the class :</label>
+            <select id="subject" name="subject">
+              <option value="Programare avansata">Programare avansata</option>
+              <option value="Tehnologii Web">Tehnologii Web</option>
+            </select></br>
+            </br>
+
+            <label for="classType">Class type :</label>
+            <select id="classType" name="classType" onchange="makeSelectVisible(this)">
+              <option value="Seminary">Seminary</option>
+              <option value="Course">Course</option>
+              <option value="Laboratory">Laboratory</option>
+            </select></br>
+            </br>
+
             <label for="room">Room assign to this class :</label>
             <select id="room" name="room">
               <option value="Room C308">Room C308</option>
@@ -42,19 +74,28 @@
             </select></br>
             </br>
 
-            <label for="group">Student group :</label>
+            <script>
+              function makeSelectVisible(select){
+                if (select.value !== "Course"){
+                  document.getElementById('group').style.display = 'inline-block';
+                  document.getElementById('group-label').style.display = 'inline-block';
+                } else{
+                  document.getElementById('group').style.display = 'none';
+                  document.getElementById('group-label').style.display = 'none';
+                }
+              }
+            </script>
+
+
+
+            <label id="group-label" for="group">Student group :</label>
             <select id="group" name="group">
               <option value="Group B4">Group B4</option>
               <option value="Group B5">Group B5</option>
             </select></br>
             </br>
 
-            <label for="subject">Subject of the class :</label>
-            <select id="subject" name="subject">
-              <option value="Programare avansata">Programare avansata</option>
-              <option value="Tehnologii Web">Tehnologii Web</option>
-            </select></br>
-            </br>
+
           </div>
         </div>
 
@@ -70,6 +111,8 @@
               <option value="Saturday">Saturday</option>
             </select></br>
             </br>
+
+
 
             <label for="begin_time">Begin of the class :</label>
             <select id="begin_time" name="begin_time">
@@ -102,6 +145,24 @@
               <option value="20:00">20:00</option>
             </select></br>
             </br>
+
+            <script>
+              var begin_time = document.getElementById("begin_time");
+              var end_time = document.getElementById("end_time");
+
+              begin_time.onchange = function() {
+                var start_hour_as_int = parseInt(begin_time.value.split(":")[0]);
+                end_time.value = `${start_hour_as_int + 2}:00`;
+                for (var i = 0; i < end_time.children.length; i++){
+                  if (parseInt(end_time.children[i].value.split(":")[0]) <= start_hour_as_int + 1){
+                    end_time.children[i].classList.add('disabled')
+                  }else {
+                    end_time.children[i].classList.remove('disabled')
+                  }
+                }
+              }
+            </script>
+
           </div>
         </div>
       </div>
