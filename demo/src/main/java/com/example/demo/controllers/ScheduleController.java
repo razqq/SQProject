@@ -1,6 +1,7 @@
 package com.example.demo.controllers;
 
 import com.example.demo.entities.*;
+import com.example.demo.util.Validator;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
@@ -43,6 +44,10 @@ public class ScheduleController {
         timeslot.setStudGroup(studGroup);
         timeslot.setEndTime(endTime);
         timeslot.setStartTime(startTime);
+
+        if (!Validator.validateSchedule(timeslot)){
+            return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, conflict detected\"}");
+        }
 
         //validation before adding - e.g. check for collision
         Schedule.timeslots.add(timeslot);

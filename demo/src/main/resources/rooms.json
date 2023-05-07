@@ -1,11 +1,11 @@
 [{
   "name": "C309",
-  "roomType": "curs",
+  "roomType": "Course",
   "capacity": 100
 },
 {
 "name": "C308",
-"roomType": "curs",
+"roomType": "Course",
 "capacity": 100
 }
 ]

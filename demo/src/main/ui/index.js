@@ -1,6 +1,7 @@
 const express = require('express')
 const app = express()
 const cookieSession = require('cookie-session')
+const {data} = require("express-session/session/cookie");
 
 app.use('/css', express.static(__dirname + '/css'))
 app.engine('html', require('ejs').renderFile);
@@ -15,8 +16,14 @@ app.get('/', function (req, res) {
     res.render('index.ejs')
 })
 
-app.get('/timetable', function (req, res) {
-    res.render('timetable.ejs')
+app.get('/timetable', async function (req, res) {
+    fetch("http://localhost:8080/api/schedule/get")
+        .then(function (response) {
+            return response.json();
+        }).then(function (data){
+            console.log(data)
+            res.render('timetable.ejs', data)
+    })
 })
 
 app.post('/result', function (req, res) {
@@ -30,6 +37,9 @@ app.post('/result', function (req, res) {
     begin_time: req.body.begin_time,
     end_time: req.body.end_time
   }
+
+  console.log(data)
+
   res.render('result.ejs',data)
 })
 
