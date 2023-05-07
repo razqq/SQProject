@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.Room;
 import com.example.demo.entities.Subject;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -32,9 +31,6 @@ public class SubjectController {
         return ResponseEntity.ok(subjects);
     }
 
-//    @PostMapping(path = "/subjects/add")
-//    public ResponseEntity<?> addSubjectToTimeslot(@RequestBody Subject subject) {
-//
-//    }
+
 }
 

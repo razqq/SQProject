@@ -1,6 +1,5 @@
 package com.example.demo.controllers;
 
-import com.example.demo.entities.Room;
 import com.example.demo.entities.Teacher;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -30,11 +29,6 @@ public class TeacherController {
 
         return ResponseEntity.ok(teachers);
     }
-
-//    @PostMapping(path = "/teacher/add")
-//    public ResponseEntity<?> addTeacherToTimeslot(@RequestBody Teacher teacher) {
-//
-//    }
 
 
 }

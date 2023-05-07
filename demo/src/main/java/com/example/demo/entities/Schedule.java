@@ -1,9 +1,10 @@
 package com.example.demo.entities;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Schedule {
-    List<Timeslot> timeslots;
+    public static List<Timeslot> timeslots = new ArrayList<>();
 
     public void addTimeslot(Timeslot timeslot){
         timeslots.add(timeslot);

@@ -1,4 +1,78 @@
 package com.example.demo.controllers;
 
+import com.example.demo.entities.Room;
+import com.example.demo.entities.Schedule;
+import com.example.demo.entities.StudGroup;
+import com.example.demo.entities.Subject;
+import com.example.demo.entities.Teacher;
+import com.example.demo.entities.Timeslot;
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
+import java.io.File;
+import java.io.IOException;
+import java.util.List;
+
+@Slf4j
+@RestController
+@RequestMapping(value = "/api/", method = RequestMethod.GET)
 public class ScheduleController {
+
+
+    @PostMapping(path = "/schedule/add")
+    public ResponseEntity<?> addTimeslotToSchedule(@RequestParam("startTime") int startTime,
+                                                   @RequestParam("endTime") int endTime,
+                                                   @RequestParam("day") String day,
+                                                   @RequestParam("StudGroup") StudGroup studGroup,
+                                                   @RequestParam("subject") Subject subject,
+                                                   @RequestParam("classType") String classType,
+                                                   @RequestParam("teacher") Teacher teacher,
+                                                   @RequestParam("room") Room room
+    )
+            throws IOException {
+
+
+        log.info("ScheduleController:  submit timeslot");
+
+        Timeslot timeslot = new Timeslot();
+        timeslot.setSubject(subject);
+        timeslot.setTeacher(teacher);
+        timeslot.setRoom(room);
+        timeslot.setClassType(classType);
+        timeslot.setDay(day);
+        timeslot.setStudGroup(studGroup);
+        timeslot.setEndTime(endTime);
+        timeslot.setStartTime(startTime);
+
+        //validation before adding - e.g. check for collision
+        Schedule.timeslots.add(timeslot);
+
+
+        final ObjectMapper objectMapper = new ObjectMapper();
+
+        objectMapper.writeValue(new File("src/main/resources/schedule.json"), Schedule.timeslots);
+
+
+        return ResponseEntity.ok(Schedule.timeslots);
+    }
+
+    @GetMapping(path = "/schedule/list")
+    public ResponseEntity<?> listTimeslots() throws IOException {
+
+        log.info("ScheduleController:  list schedule");
+
+        final ObjectMapper objectMapper = new ObjectMapper();
+        List<Timeslot> timeslots = objectMapper.readValue(new File("src/main/resources/schedule.json"), new TypeReference<List<Timeslot>>() {
+        });
+
+        return ResponseEntity.ok(timeslots);
+    }
 }
