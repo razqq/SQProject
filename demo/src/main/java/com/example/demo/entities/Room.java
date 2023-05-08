@@ -18,7 +18,7 @@ public class Room {
     public Room(String name) throws IOException {
         this.name = name;
         final ObjectMapper objectMapper = new ObjectMapper();
-        List<Room> rooms = objectMapper.readValue(new File("demo/src/main/resources/rooms.json"), new TypeReference<List<Room>>() {
+        List<Room> rooms = objectMapper.readValue(new File("src/main/resources/rooms.json"), new TypeReference<List<Room>>() {
         });
         Room roomData = rooms.stream().filter(room -> room.name.equals(this.name)).findAny().get();
         this.capacity = roomData.capacity;

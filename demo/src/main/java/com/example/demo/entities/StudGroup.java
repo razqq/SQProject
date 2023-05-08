@@ -20,7 +20,7 @@ public class StudGroup {
     public StudGroup(String groupName) throws IOException {
         this.groupName = groupName;
         ObjectMapper objectMapper = new ObjectMapper();
-        List<StudGroup> studGroups = objectMapper.readValue(new File("demo/src/main/resources/studgroups.json"), new TypeReference<>() {
+        List<StudGroup> studGroups = objectMapper.readValue(new File("src/main/resources/studgroups.json"), new TypeReference<>() {
         });
         StudGroup groupData = studGroups.stream().filter(group -> group.groupName.equals(this.groupName)).findAny().get();
         log.info(groupData.year);

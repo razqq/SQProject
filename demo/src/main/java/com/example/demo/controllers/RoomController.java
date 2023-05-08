@@ -24,7 +24,7 @@ public class RoomController {
         log.info("RoomController:  list rooms");
 
         final ObjectMapper objectMapper = new ObjectMapper();
-        List<Room> rooms = objectMapper.readValue(new File("demo/src/main/resources/rooms.json"), new TypeReference<List<Room>>() {
+        List<Room> rooms = objectMapper.readValue(new File("src/main/resources/rooms.json"), new TypeReference<List<Room>>() {
         });
 
         return ResponseEntity.ok(rooms);

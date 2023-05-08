@@ -19,7 +19,7 @@ public class Subject {
         this.name = name;
 
         ObjectMapper objectMapper = new ObjectMapper();
-        List<Subject> subjects = objectMapper.readValue(new File("demo/src/main/resources/subjects.json"), new TypeReference<List<Subject>>() {
+        List<Subject> subjects = objectMapper.readValue(new File("src/main/resources/subjects.json"), new TypeReference<List<Subject>>() {
         });
         Subject subjectData = subjects.stream().filter(subj -> subj.name.equals(this.name)).findAny().get();
         this.year = subjectData.year;

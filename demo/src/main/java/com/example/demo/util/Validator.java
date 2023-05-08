@@ -5,6 +5,7 @@ import com.example.demo.entities.Timeslot;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Log4j2
 public class Validator {
@@ -32,23 +33,31 @@ public class Validator {
                 checkTimeFrameOveralps(existingTimeslot, newTimeslot);
     }
 
-    public static boolean validateSchedule(Timeslot timeslot){
-        
-        if (!validateClassTypeEqualsRoomType(timeslot))
-            return false;
+    public static int validateSchedule(Timeslot timeslot){
+
+        AtomicInteger messageIndex = new AtomicInteger(0);
+
+        if (!validateClassTypeEqualsRoomType(timeslot)){
+            messageIndex.set(1);
+            return messageIndex.get();
+        }
 
         log.info("Got here");
 
-        AtomicBoolean isValid = new AtomicBoolean(true);
-        
         Schedule.timeslots.forEach(
                 existingTimeslot -> {
                     if (checkSameTeacherSameRoomSameTime(existingTimeslot, timeslot)){
-                        isValid.set(false);
+                        messageIndex.set(2);
+                    } else if (checkSameTeacher(existingTimeslot, timeslot)) {
+                        messageIndex.set(3);
+                    } else if (checkSameRoom(existingTimeslot, timeslot)) {
+                        messageIndex.set(4);
+                    } else if (checkTimeFrameOveralps(existingTimeslot, timeslot)) {
+                        messageIndex.set(5);
                     }
                 }
         );
 
-        return isValid.get();
+        return messageIndex.get();
     }
 }

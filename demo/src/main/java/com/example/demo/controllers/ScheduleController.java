@@ -45,9 +45,26 @@ public class ScheduleController {
         timeslot.setEndTime(endTime);
         timeslot.setStartTime(startTime);
 
-        if (!Validator.validateSchedule(timeslot)) {
-            return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, conflict detected\"," +
-                    "\"errorMessage\": \"Invalid class, conflict detected\"}");
+        if (Validator.validateSchedule(timeslot) != 0) {
+            switch (Validator.validateSchedule(timeslot)) {
+                case 1:
+                    return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, the course is scheduled in the wrong room.\"," +
+                            "\"errorMessage\": \"Invalid class, the course is scheduled in the wrong room.\"}");
+                case 2:
+                    return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, the teacher has already scheduled a course here at this time.\"," +
+                            "\"errorMessage\": \"Invalid class, the teacher has already scheduled a course here at this time.\"}");
+                case 3:
+                    return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, the teacher has already a program at this time.\"," +
+                            "\"errorMessage\": \"Invalid class, the teacher has already a program at this time.\"}");
+                case 4:
+                    return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, the room is already occupied at this time.\"," +
+                            "\"errorMessage\": \"Invalid class, the room is already occupied at this time.\"}");
+                case 5:
+                    return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, it overlaps with other courses.\"," +
+                            "\"errorMessage\": \"Invalid class, it overlaps with other courses.\"}");
+//                return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, conflict detected\"," +
+//                    "\"errorMessage\": \"Invalid class, conflict detected\"}");
+            }
         }
 
         //validation before adding - e.g. check for collision
@@ -56,7 +73,7 @@ public class ScheduleController {
 
         final ObjectMapper objectMapper = new ObjectMapper();
 
-        objectMapper.writeValue(new File("demo/src/main/resources/schedule.json"), Schedule.timeslots);
+        objectMapper.writeValue(new File("src/main/resources/schedule.json"), Schedule.timeslots);
 
 
         return ResponseEntity.ok(Schedule.timeslots);
@@ -68,7 +85,7 @@ public class ScheduleController {
         log.info("ScheduleController:  list schedule");
 
         final ObjectMapper objectMapper = new ObjectMapper();
-        List<Timeslot> timeslots = objectMapper.readValue(new File("demo/src/main/resources/schedule.json"), new TypeReference<List<Timeslot>>() {
+        List<Timeslot> timeslots = objectMapper.readValue(new File("src/main/resources/schedule.json"), new TypeReference<List<Timeslot>>() {
         });
 
         return ResponseEntity.ok(timeslots);

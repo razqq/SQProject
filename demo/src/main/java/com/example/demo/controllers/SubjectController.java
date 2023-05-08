@@ -25,7 +25,7 @@ public class SubjectController {
         log.info("SubjectController:  list subjects");
 
         final ObjectMapper objectMapper = new ObjectMapper();
-        List<Subject> subjects = objectMapper.readValue(new File("demo/src/main/resources/subjects.json"), new TypeReference<List<Subject>>() {
+        List<Subject> subjects = objectMapper.readValue(new File("src/main/resources/subjects.json"), new TypeReference<List<Subject>>() {
         });
 
         return ResponseEntity.ok(subjects);

@@ -17,5 +17,30 @@
     "groupName": "A1",
     "year": 2,
     "nrStudents": 45
+  },
+  {
+    "groupName": "A3",
+    "year": 1,
+    "nrStudents": 30
+  },
+  {
+    "groupName": "A4",
+    "year": 1,
+    "nrStudents": 30
+  },
+  {
+    "groupName": "A5",
+    "year": 3,
+    "nrStudents": 35
+  },
+  {
+    "groupName": "E11",
+    "year": 1,
+    "nrStudents": 30
+  },
+  {
+    "groupName": "E12",
+    "year": 1,
+    "nrStudents": 30
   }
 ]
