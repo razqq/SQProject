@@ -7,5 +7,15 @@
     "groupName": "B5",
     "year": 2,
     "nrStudents": 30
+  },
+  {
+    "groupName": "A2",
+    "year": 2,
+    "nrStudents": 20
+  },
+  {
+    "groupName": "A1",
+    "year": 2,
+    "nrStudents": 45
   }
 ]

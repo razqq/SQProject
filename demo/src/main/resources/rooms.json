@@ -7,5 +7,20 @@
 "name": "C308",
 "roomType": "Course",
 "capacity": 100
-}
+},
+  {
+    "name": "C101",
+    "roomType": "Laboratory",
+    "capacity": 15
+  },
+  {
+    "name": "C104",
+    "roomType": "Laboratory",
+    "capacity": 30
+  },
+  {
+    "name": "C203",
+    "roomType": "Seminary",
+    "capacity": 30
+  }
 ]
