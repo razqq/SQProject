@@ -25,39 +25,7 @@
 
   <div class="container">
 
-    <script>
-      document.getElementById("submit-form").addEventListener("click",
-      function (event){
-        event.preventDefault()
-      });
-
-      function addToSchedule(timeslot) {
-        console.log(timeslot)
-
-        fetch('http://localhost:8080/api/schedule/add?' + new URLSearchParams({
-          startTime: timeslot[6].value.split(":")[0],
-          endTime: timeslot[7].value.split(":")[0],
-          day: timeslot[5].value,
-          StudGroup: timeslot[4].value,
-          teacher: timeslot[0].value,
-          subject: timeslot[1].value,
-          classType: timeslot[2].value,
-          room: timeslot[3].value
-
-        }),
-                {
-                  method: 'PUT',
-                  headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                  }
-                })
-        alert("test")
-        return false;
-      }
-    </script>
-
-    <form id="submit-form" action="/result" method="post" onsubmit="addToSchedule(this)">
+    <form id="submit-form" action="/result" method="post"">
       <div class="row">
         <div class="column">
           <div class="cours">

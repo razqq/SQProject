@@ -3,7 +3,10 @@ package com.example.demo.entities;
 public enum Day {
 
     Monday("Monday"),
-    Tuesday("Tuesday");
+    Tuesday("Tuesday"),
+    Wednesday("Wednesday"),
+    Thursday("Thursday"),
+    Friday("Friday");
 
     private final String value;
 

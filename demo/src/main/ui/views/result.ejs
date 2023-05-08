@@ -47,6 +47,16 @@
             </div>
         <input type="submit" value="Create a new class" onclick="location.href='/'">
         <input type="submit" value="See timetable" onclick="location.href='/timetable'">
+
+            <% if (locals.error_message) {%>
+                <script>
+                    setTimeout(() => alert(`<%= error_message %>`), 100)
+                </script>
+            <% } else { %>
+                <script>
+                    setTimeout(() => alert(`Class successfully added`), 100)
+                </script>
+            <% } %>
         </div>
     </div>
 

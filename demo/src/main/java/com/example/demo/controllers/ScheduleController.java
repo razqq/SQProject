@@ -45,8 +45,9 @@ public class ScheduleController {
         timeslot.setEndTime(endTime);
         timeslot.setStartTime(startTime);
 
-        if (!Validator.validateSchedule(timeslot)){
-            return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, conflict detected\"}");
+        if (!Validator.validateSchedule(timeslot)) {
+            return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, conflict detected\"," +
+                    "\"errorMessage\": \"Invalid class, conflict detected\"}");
         }
 
         //validation before adding - e.g. check for collision
