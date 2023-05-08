@@ -15,8 +15,15 @@ public class Validator {
     }
     
     private static boolean checkTimeFrameOveralps(Timeslot existingTimeslot, Timeslot newTimeslot){
-        return existingTimeslot.getStartTime() > newTimeslot.getEndTime() ||
-                existingTimeslot.getEndTime() < newTimeslot.getStartTime();
+        return (existingTimeslot.getStartTime() > newTimeslot.getEndTime() ||
+                existingTimeslot.getEndTime() < newTimeslot.getStartTime()) &&
+                existingTimeslot.getDay().getValue().equals(newTimeslot.getDay().getValue());
+    }
+
+    private static boolean checkSameTimeFrame(Timeslot existingTimeslot, Timeslot newTimeslot){
+        return existingTimeslot.getStartTime() == newTimeslot.getEndTime() &&
+                existingTimeslot.getEndTime() == newTimeslot.getStartTime() &&
+                existingTimeslot.getDay().getValue().equals(newTimeslot.getDay().getValue());
     }
 
     private static boolean checkSameTeacher(Timeslot existingTimeslot, Timeslot newTimeslot){
@@ -30,12 +37,13 @@ public class Validator {
     private static boolean checkSameTeacherSameRoomSameTime(Timeslot existingTimeslot, Timeslot newTimeslot){
         return checkSameRoom(existingTimeslot, newTimeslot) &&
                 checkSameTeacher(existingTimeslot, newTimeslot) &&
-                checkTimeFrameOveralps(existingTimeslot, newTimeslot);
+                checkSameTimeFrame(existingTimeslot, newTimeslot);
     }
 
     public static int validateSchedule(Timeslot timeslot){
 
         AtomicInteger messageIndex = new AtomicInteger(0);
+        AtomicBoolean errorFound = new AtomicBoolean(false);
 
         if (!validateClassTypeEqualsRoomType(timeslot)){
             messageIndex.set(1);
@@ -46,14 +54,18 @@ public class Validator {
 
         Schedule.timeslots.forEach(
                 existingTimeslot -> {
-                    if (checkSameTeacherSameRoomSameTime(existingTimeslot, timeslot)){
+                    if (checkSameTeacherSameRoomSameTime(existingTimeslot, timeslot) && !errorFound.get()){
                         messageIndex.set(2);
-                    } else if (checkSameTeacher(existingTimeslot, timeslot)) {
+                        errorFound.set(true);
+                    } else if (checkSameTeacher(existingTimeslot, timeslot) && !errorFound.get()) {
                         messageIndex.set(3);
-                    } else if (checkSameRoom(existingTimeslot, timeslot)) {
+                        errorFound.set(true);
+                    } else if (checkSameRoom(existingTimeslot, timeslot) && !errorFound.get()) {
                         messageIndex.set(4);
-                    } else if (checkTimeFrameOveralps(existingTimeslot, timeslot)) {
+                        errorFound.set(true);
+                    } else if (checkTimeFrameOveralps(existingTimeslot, timeslot) && !errorFound.get()) {
                         messageIndex.set(5);
+                        errorFound.set(true);
                     }
                 }
         );
