@@ -1,0 +1,21 @@
+[{
+  "name": "Programare avansata",
+  "year": 2,
+  "semester": 2
+},
+  {
+    "name": "Tehnologii Web",
+    "year": 2,
+    "semester": 2
+  },
+  {
+    "name": "Sisteme Embedded",
+    "year": 3,
+    "semester": 1
+  },
+  {
+    "name": "Calitatea Sistemelor Software",
+    "year": 4,
+    "semester": 2
+  }
+]

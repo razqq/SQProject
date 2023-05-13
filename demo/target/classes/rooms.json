@@ -1,0 +1,56 @@
+[{
+  "name": "C309",
+  "roomType": "Course",
+  "capacity": 100
+},
+{
+"name": "C308",
+"roomType": "Course",
+"capacity": 100
+},
+  {
+    "name": "C101",
+    "roomType": "Laboratory",
+    "capacity": 15
+  },
+  {
+    "name": "C104",
+    "roomType": "Laboratory",
+    "capacity": 30
+  },
+  {
+    "name": "C203",
+    "roomType": "Seminary",
+    "capacity": 30
+  },
+  {
+    "name": "C401",
+    "roomType": "Laboratory",
+    "capacity": 30
+  },
+  {
+    "name": "C405",
+    "roomType": "Laboratory",
+    "capacity": 30
+  },
+  {
+    "name": "C901",
+    "roomType": "Seminary",
+    "capacity": 30
+  },
+  {
+    "name": "C903",
+    "roomType": "Seminary",
+    "capacity": 30
+  },
+  {
+    "name": "C2",
+    "roomType": "Course",
+    "capacity": 200
+  },
+  {
+    "name": "C112",
+    "roomType": "Course",
+    "capacity": 120
+  }
+]
