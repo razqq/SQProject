@@ -24,7 +24,7 @@ public class TeacherController {
         log.info("TeacherController:  list teachers");
 
         final ObjectMapper objectMapper = new ObjectMapper();
-        List<Teacher> teachers = objectMapper.readValue(new File("demo/src/main/resources/teachers.json"), new TypeReference<List<Teacher>>() {
+        List<Teacher> teachers = objectMapper.readValue(new File("src/main/resources/teachers.json"), new TypeReference<List<Teacher>>() {
         });
 
         return ResponseEntity.ok(teachers);

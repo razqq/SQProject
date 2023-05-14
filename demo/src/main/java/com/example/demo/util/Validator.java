@@ -5,6 +5,7 @@ import com.example.demo.entities.Timeslot;
 import lombok.extern.log4j.Log4j2;
 
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 @Log4j2
 public class Validator {
@@ -14,8 +15,15 @@ public class Validator {
     }
     
     private static boolean checkTimeFrameOveralps(Timeslot existingTimeslot, Timeslot newTimeslot){
-        return existingTimeslot.getStartTime() > newTimeslot.getEndTime() ||
-                existingTimeslot.getEndTime() < newTimeslot.getStartTime();
+        return (existingTimeslot.getStartTime() > newTimeslot.getEndTime() ||
+                existingTimeslot.getEndTime() < newTimeslot.getStartTime()) &&
+                existingTimeslot.getDay().getValue().equals(newTimeslot.getDay().getValue());
+    }
+
+    private static boolean checkSameTimeFrame(Timeslot existingTimeslot, Timeslot newTimeslot){
+        return existingTimeslot.getStartTime() == newTimeslot.getEndTime() &&
+                existingTimeslot.getEndTime() == newTimeslot.getStartTime() &&
+                existingTimeslot.getDay().getValue().equals(newTimeslot.getDay().getValue());
     }
 
     private static boolean checkSameTeacher(Timeslot existingTimeslot, Timeslot newTimeslot){
@@ -29,26 +37,39 @@ public class Validator {
     private static boolean checkSameTeacherSameRoomSameTime(Timeslot existingTimeslot, Timeslot newTimeslot){
         return checkSameRoom(existingTimeslot, newTimeslot) &&
                 checkSameTeacher(existingTimeslot, newTimeslot) &&
-                checkTimeFrameOveralps(existingTimeslot, newTimeslot);
+                checkSameTimeFrame(existingTimeslot, newTimeslot);
     }
 
-    public static boolean validateSchedule(Timeslot timeslot){
-        
-        if (!validateClassTypeEqualsRoomType(timeslot))
-            return false;
+    public static int validateSchedule(Timeslot timeslot){
+
+        AtomicInteger messageIndex = new AtomicInteger(0);
+        AtomicBoolean errorFound = new AtomicBoolean(false);
+
+        if (!validateClassTypeEqualsRoomType(timeslot)){
+            messageIndex.set(1);
+            return messageIndex.get();
+        }
 
         log.info("Got here");
 
-        AtomicBoolean isValid = new AtomicBoolean(true);
-        
         Schedule.timeslots.forEach(
                 existingTimeslot -> {
-                    if (checkSameTeacherSameRoomSameTime(existingTimeslot, timeslot)){
-                        isValid.set(false);
+                    if (checkSameTeacherSameRoomSameTime(existingTimeslot, timeslot) && !errorFound.get()){
+                        messageIndex.set(2);
+                        errorFound.set(true);
+                    } else if (checkSameTeacher(existingTimeslot, timeslot) && !errorFound.get()) {
+                        messageIndex.set(3);
+                        errorFound.set(true);
+                    } else if (checkSameRoom(existingTimeslot, timeslot) && !errorFound.get()) {
+                        messageIndex.set(4);
+                        errorFound.set(true);
+                    } else if (checkTimeFrameOveralps(existingTimeslot, timeslot) && !errorFound.get()) {
+                        messageIndex.set(5);
+                        errorFound.set(true);
                     }
                 }
         );
 
-        return isValid.get();
+        return messageIndex.get();
     }
 }

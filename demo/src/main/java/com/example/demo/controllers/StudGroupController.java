@@ -24,7 +24,7 @@ public class StudGroupController {
         log.info("StudGroupController:  list studgroups");
 
         final ObjectMapper objectMapper = new ObjectMapper();
-        List<StudGroup> studGroups = objectMapper.readValue(new File("demo/src/main/resources/studgroups.json"), new TypeReference<List<StudGroup>>() {
+        List<StudGroup> studGroups = objectMapper.readValue(new File("src/main/resources/studgroups.json"), new TypeReference<List<StudGroup>>() {
         });
 
         return ResponseEntity.ok(studGroups);
