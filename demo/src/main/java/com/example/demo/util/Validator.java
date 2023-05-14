@@ -10,37 +10,37 @@ import java.util.concurrent.atomic.AtomicInteger;
 @Log4j2
 public class Validator {
     
-    private static boolean validateClassTypeEqualsRoomType(Timeslot timeslot){
+    private boolean validateClassTypeEqualsRoomType(Timeslot timeslot){
         return timeslot.getClassType().equals(timeslot.getRoom().getRoomType());
     }
     
-    private static boolean checkTimeFrameOveralps(Timeslot existingTimeslot, Timeslot newTimeslot){
+    private boolean checkTimeFrameOveralps(Timeslot existingTimeslot, Timeslot newTimeslot){
         return (existingTimeslot.getStartTime() > newTimeslot.getEndTime() ||
                 existingTimeslot.getEndTime() < newTimeslot.getStartTime()) &&
                 existingTimeslot.getDay().getValue().equals(newTimeslot.getDay().getValue());
     }
 
-    private static boolean checkSameTimeFrame(Timeslot existingTimeslot, Timeslot newTimeslot){
+    private boolean checkSameTimeFrame(Timeslot existingTimeslot, Timeslot newTimeslot){
         return existingTimeslot.getStartTime() == newTimeslot.getEndTime() &&
                 existingTimeslot.getEndTime() == newTimeslot.getStartTime() &&
                 existingTimeslot.getDay().getValue().equals(newTimeslot.getDay().getValue());
     }
 
-    private static boolean checkSameTeacher(Timeslot existingTimeslot, Timeslot newTimeslot){
+    private boolean checkSameTeacher(Timeslot existingTimeslot, Timeslot newTimeslot){
         return existingTimeslot.getTeacher().getName().equals(newTimeslot.getTeacher().getName());
     }
 
-    private static boolean checkSameRoom(Timeslot existingTimeslot, Timeslot newTimeslot){
+    private boolean checkSameRoom(Timeslot existingTimeslot, Timeslot newTimeslot){
         return existingTimeslot.getRoom().getName().equals(newTimeslot.getRoom().getName());
     }
     
-    private static boolean checkSameTeacherSameRoomSameTime(Timeslot existingTimeslot, Timeslot newTimeslot){
+    private boolean checkSameTeacherSameRoomSameTime(Timeslot existingTimeslot, Timeslot newTimeslot){
         return checkSameRoom(existingTimeslot, newTimeslot) &&
                 checkSameTeacher(existingTimeslot, newTimeslot) &&
                 checkSameTimeFrame(existingTimeslot, newTimeslot);
     }
 
-    public static int validateSchedule(Timeslot timeslot){
+    public int validateSchedule(Timeslot timeslot){
 
         AtomicInteger messageIndex = new AtomicInteger(0);
         AtomicBoolean errorFound = new AtomicBoolean(false);
@@ -49,8 +49,6 @@ public class Validator {
             messageIndex.set(1);
             return messageIndex.get();
         }
-
-        log.info("Got here");
 
         Schedule.timeslots.forEach(
                 existingTimeslot -> {

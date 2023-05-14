@@ -1,7 +1,6 @@
 const express = require('express')
 const app = express()
 const cookieSession = require('cookie-session')
-const {data} = require("express-session/session/cookie");
 
 app.use('/css', express.static(__dirname + '/css'))
 app.engine('html', require('ejs').renderFile);

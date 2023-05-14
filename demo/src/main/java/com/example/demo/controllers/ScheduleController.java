@@ -18,6 +18,8 @@ import java.util.List;
 @RequestMapping(value = "/api/", method = RequestMethod.GET)
 public class ScheduleController {
 
+    private final Validator validator = new Validator();
+
 
     @CrossOrigin
     @PutMapping(path = "/schedule/add")
@@ -45,8 +47,8 @@ public class ScheduleController {
         timeslot.setEndTime(endTime);
         timeslot.setStartTime(startTime);
 
-        if (Validator.validateSchedule(timeslot) != 0) {
-            switch (Validator.validateSchedule(timeslot)) {
+        if (validator.validateSchedule(timeslot) != 0) {
+            switch (validator.validateSchedule(timeslot)) {
                 case 1:
                     return ResponseEntity.badRequest().body("{\"message\": \"Invalid class, the course is scheduled in the wrong room.\"," +
                             "\"errorMessage\": \"Invalid class, the course is scheduled in the wrong room.\"}");
