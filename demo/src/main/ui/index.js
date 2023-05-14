@@ -114,3 +114,5 @@ app.post('/result', async function (req, res) {
 })
 
 app.listen(3000, () => console.log(`App running in http://localhost:3000`))
+
+module.exports = app;
