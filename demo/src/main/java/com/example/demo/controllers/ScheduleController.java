@@ -69,13 +69,16 @@ public class ScheduleController {
             }
         }
 
-        //validation before adding - e.g. check for collision
-        Schedule.timeslots.add(timeslot);
-
-
         final ObjectMapper objectMapper = new ObjectMapper();
 
+        //validation before adding - e.g. check for collision
+
+        Schedule.timeslots.add(timeslot);
+
         objectMapper.writeValue(new File("src/main/resources/schedule.json"), Schedule.timeslots);
+
+        assert objectMapper.readValue(new File("src/main/resources/schedule.json"), new TypeReference<List<Timeslot>>() {
+        }).size() == Schedule.timeslots.size() : "Timeslot was not saved in json";
 
 
         return ResponseEntity.ok(Schedule.timeslots);
