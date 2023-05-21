@@ -37,6 +37,13 @@ public class ScheduleController {
 
         log.info("ScheduleController:  submit timeslot");
 
+        assert startTime >= 8 && startTime <= 18 : "Wrong start time - start time must be between 8 and 18";
+        assert endTime >= 10 && endTime <= 20 : "Wrong end time - end time must be between 10 and 20";
+        assert classType.equals("Course") || classType.equals("Seminary")
+                || classType.equals("Laboratory") : "Wrong class type - it should be either a course, or a seminar, or a laboratory";
+        assert day.equals(Day.Monday) || day.equals(Day.Tuesday) || day.equals(Day.Wednesday)
+                || day.equals(Day.Thursday) || day.equals(Day.Friday) : "Wrong day - timeslots should be put between Monday and Friday.";
+
         Timeslot timeslot = new Timeslot();
         timeslot.setSubject(subject);
         timeslot.setTeacher(teacher);
