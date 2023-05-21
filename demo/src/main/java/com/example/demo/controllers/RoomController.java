@@ -26,6 +26,9 @@ public class RoomController {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<Room> rooms = objectMapper.readValue(new File("src/main/resources/rooms.json"), new TypeReference<List<Room>>() {
         });
+        assert rooms.size() != 0 : "Rooms database is empty";
+        assert rooms.stream().anyMatch(room -> room.getName().equals("C309")) : "Room C309 is missing from the database, corrupted database.";
+        assert rooms.stream().anyMatch(room -> room.getName().equals("C308")) : "Room C308 is missing from the database, corrupted database.";
 
         return ResponseEntity.ok(rooms);
     }

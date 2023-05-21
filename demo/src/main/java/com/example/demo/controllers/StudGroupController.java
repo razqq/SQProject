@@ -26,6 +26,9 @@ public class StudGroupController {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<StudGroup> studGroups = objectMapper.readValue(new File("src/main/resources/studgroups.json"), new TypeReference<List<StudGroup>>() {
         });
+        assert studGroups.size() != 0 : "Student Groups database is empty";
+        assert studGroups.stream().anyMatch(group -> group.getGroupName().equals("A1")) : "Student group A1 is missing from the database, corrupted database.";
+        assert studGroups.stream().anyMatch(group -> group.getGroupName().equals("A2")) : "Student group A2 is missing from the database, corrupted database.";
 
         return ResponseEntity.ok(studGroups);
     }

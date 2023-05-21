@@ -26,6 +26,10 @@ public class TeacherController {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<Teacher> teachers = objectMapper.readValue(new File("src/main/resources/teachers.json"), new TypeReference<List<Teacher>>() {
         });
+        assert teachers.size() != 0 : "Teachers database is empty";
+        assert teachers.stream().anyMatch(teacher -> teacher.getName().equals("Radulescu Vlad")) : "Teacher Radulescu Vlad is missing from the database, corrupted database.";
+        assert teachers.stream().anyMatch(teacher -> teacher.getName().equals("Filipescu Iustina")) : "Teacher Filipescu Iustina is missing from the database, corrupted database.";
+
 
         return ResponseEntity.ok(teachers);
     }

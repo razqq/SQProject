@@ -27,6 +27,9 @@ public class SubjectController {
         final ObjectMapper objectMapper = new ObjectMapper();
         List<Subject> subjects = objectMapper.readValue(new File("src/main/resources/subjects.json"), new TypeReference<List<Subject>>() {
         });
+        assert subjects.size() != 0 : "Subjects database is empty";
+        assert subjects.stream().anyMatch(subject -> subject.getName().equals("Programare avansata")) : "Subject Programare avansata is missing from the database, corrupted database.";
+        assert subjects.stream().anyMatch(subject -> subject.getName().equals("Sisteme Embedded")) : "Subject Sisteme Embedded is missing from the database, corrupted database.";
 
         return ResponseEntity.ok(subjects);
     }
